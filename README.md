@@ -17,8 +17,7 @@ This project aims to keep these young trainers accountable for their Pokémons' 
 ## Features
 
 ### Home Screen
-Gallery/Styles             
-:-------------------------:
+
 [ Insert title and GIF of homepage ]
 
 <b>Features</b>
