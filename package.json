@@ -2,8 +2,10 @@
   "name": "wegojim",
   "version": "1.0.0",
   "description": "A Pokémon trainer's tool to beat the Elite Four.",
-  "main": "index.js",
+  "main": "server/index.js",
   "scripts": {
+    "server-start": "nodemon server.js -w",
+    "client-start": "webpack --config webpack.config.js -w",
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack --config webpack.config.js"
   },
@@ -16,9 +18,12 @@
     "axios": "^0.27.2",
     "dotenv": "^16.0.1",
     "express": "^4.18.1",
+    "file-loader": "^6.2.0",
     "nodemon": "^2.0.19",
     "pg": "^8.7.3",
-    "react": "^18.2.0"
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "styled-components": "^5.3.5"
   },
   "devDependencies": {
     "@babel/core": "^7.18.10",
