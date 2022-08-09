@@ -9,6 +9,7 @@ import Cancel from './Cancel.jsx';
 const Gym = (props) => {
   const [exercise, setExercise] = useState([]);
   const [toggleModal, setToggleModal] = useState(false);
+  const [submit, setSubmit] = useState(false);
 
   const toggleAddModal = (e) => {
     e.preventDefault();
@@ -20,19 +21,24 @@ const Gym = (props) => {
     setExercise([]);
   };
 
+  const handleFinish = (e) => {
+    setSubmit(true);
+  };
+
   return (
     <div>
       {console.log('exercise', exercise)}
       <Badges/>
       <GymTitle/>
       {exercise.map((e, i) => {
-        return <Tracker key={'tracker' + i} name={exercise[i]['name']}/>
+        return <Tracker key={'tracker' + i} exercise={exercise} setExercise={setExercise} name={e.name} submit={submit}/>
       })}
       <button onClick={toggleAddModal}>Add Exercise</button>
       <>
         {toggleModal ? <AddModal exercise={exercise} setExercise={setExercise} setToggleModal={setToggleModal}/> : null}
       </>
       <button onClick={handleReset}>Cancel Workout</button>
+      <button onClick={handleFinish}>Finish Workout</button>
     </div>
   );
 };

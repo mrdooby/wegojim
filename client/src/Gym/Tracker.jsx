@@ -6,16 +6,41 @@ const Tracker = (props) => {
   const [prev, setPrev] = useState([{prev: 'lbs x reps'}]);
   const [lbs, setLbs] = useState([{lbs: ''}]);
   const [reps, setReps] = useState([{reps: ''}]);
+  const [data, setData] = ([]);
+
+  useEffect(() => {
+    concatData()
+    .then((result) => {
+      addFinalData(result);
+    })
+    .then(() => {
+      console.log(props.exercise);
+    })
+  }, [props.submit])
+
+  const concatData = async () => {
+    const result = [];
+    for (let i = 0; i < setNum.length; i++) {
+      let setData = {
+        "setNum": setNum[i].set,
+        "lbs": lbs[i]['lbs'],
+        "reps": reps[i]['reps'],
+        "format": `${lbs[i]['lbs']} lbs x ${reps[i]['reps']} reps`
+      }
+      result.push(setData);
+    }
+    return result;
+  };
 
   const handleLbsChange = (e, i) => {
     let temp = lbs;
-    temp[i] = e.target.value;
+    temp[i]["lbs"] = e.target.value;
     setLbs(temp);
   };
 
   const handleRepsChange = (e, i) => {
     let temp = reps;
-    reps[i] = e.target.value;
+    temp[i]["reps"] = e.target.value;
     setReps(temp);
   };
 
@@ -25,7 +50,16 @@ const Tracker = (props) => {
     setPrev([...prev, {prev: 'lbs x reps'}]);
     setLbs([...lbs, {lbs: ''}]);
     setReps([...reps, {reps: ''}]);
-  }
+  };
+
+  const addFinalData = async (info) => {
+    for (let i = 0; i < props.exercise.length; i++) {
+      if (props.exercise[i].name === props.name) {
+        props.exercise[i]['data'] = info
+      }
+    };
+  };
+
   return (
     <form>
       <p>{props.name}</p>
