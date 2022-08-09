@@ -37,7 +37,7 @@ const AddModal = (props) => {
         <option value="Duration">Duration</option>
       </select>
       <div>Previous Exercises</div>
-      <button onClick={handleClick}>Add exercise</button>
+      <button onClick={handleClick}>Add</button>
     </div>
   )
 };

@@ -10,9 +10,14 @@ const Gym = (props) => {
   const [exercise, setExercise] = useState([]);
   const [toggleModal, setToggleModal] = useState(false);
 
-  const toggleAddModal = async (e) => {
+  const toggleAddModal = (e) => {
     e.preventDefault();
     setToggleModal(true);
+  };
+
+  const handleReset = (e) => {
+    e.preventDefault();
+    setExercise([]);
   };
 
   return (
@@ -23,11 +28,11 @@ const Gym = (props) => {
       {exercise.map((e, i) => {
         return <Tracker key={'tracker' + i} name={exercise[i]['name']}/>
       })}
-      <button onClick={toggleAddModal}>add exercise</button>
+      <button onClick={toggleAddModal}>Add Exercise</button>
       <>
         {toggleModal ? <AddModal exercise={exercise} setExercise={setExercise} setToggleModal={setToggleModal}/> : null}
       </>
-      <Cancel/>
+      <button onClick={handleReset}>Cancel Workout</button>
     </div>
   );
 };
