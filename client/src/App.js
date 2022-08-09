@@ -13,10 +13,12 @@ const App = () => {
         return <Gym />;
       case 'Poffin House':
         return <PoffinHouse />
-      case 'Poke Center':
-        return <PokeCenter />
+      case 'Pokemon Center':
+        return <PokemonCenter />
+      case 'Home Page':
+        return <HomePage setView={setView}/>
       default:
-        return <HomePage/>
+        return <HomePage setView={setView}/>
     }
   };
 
@@ -28,16 +30,17 @@ const App = () => {
     return setView('Poffin House')
   };
 
-  const handlePokeCenterSwitch = () => {
+  const handlePokemonCenterSwitch = () => {
     return setView('Pokemon Center')
   };
+
   return (
     <div>
       <h1>HOENN YOURSELF</h1>
-      <div>Home Page</div>
+      <div onClick={(e) => {setView('HomePage')}}>Home Page</div>
       <div onClick={handleGymSwitch}>Gym</div>
       <div onClick={handlePoffinHouseSwitch}>Poffin House</div>
-      <div onClick={handlePokeCenterSwitch}>Pokemon Center</div>
+      <div onClick={handlePokemonCenterSwitch}>Pokemon Center</div>
       <main>
         <Suspense fallback={<p>Loading...</p>}>{renderView()}</Suspense>
       </main>
