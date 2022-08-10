@@ -19,7 +19,7 @@ const App = () => {
       case 'Home Page':
         return <HomePage setView={setView}/>
       default:
-        return <HomePage setView={setView}/>
+        return <Gym />;
     }
   };
   return (

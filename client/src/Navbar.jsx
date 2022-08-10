@@ -32,10 +32,15 @@ const Title = styled.p`
 
 const WidgetContainers = styled.div`
   display: flex;
+  justify-content: space-between;
   margin-left: auto;
   margin-right: 0;
 `;
 
 const Widget = styled.div`
   margin: 0 5px 20px;
+  text-align: center;
+  &:hover {
+    cursor: pointer;
+  };
 `;

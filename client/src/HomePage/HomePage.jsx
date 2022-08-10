@@ -1,15 +1,15 @@
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 import img from './ImageURLs.js';
-import styled from 'styled-components';
+import styled, {keyframes} from 'styled-components';
 
 const HomePage = (props) => {
   return (
     <HomePageContainer>
       <IconContainer>
-          <PoffinHouse src={img.poffin} onClick={(e) => {props.setView('Poffin House')}}></PoffinHouse>
-        <Gym src={img.gym} onClick={(e) => {props.setView('Gym')}}></Gym>
-        <PokemonCenter src={img.pkmncenter} onClick={(e) => {props.setView('Pokemon Center')}}></PokemonCenter>
+        <Icon src={img.poffin} onClick={(e) => {props.setView('Poffin House')}}></Icon>
+        <Icon src={img.gym} onClick={(e) => {props.setView('Gym')}}></Icon>
+        <Icon src={img.pkmncenter} onClick={(e) => {props.setView('Pokemon Center')}}></Icon>
       </IconContainer>
     </HomePageContainer>
   )
@@ -27,20 +27,26 @@ const IconContainer = styled.div`
   flex-direction: column;
 `;
 
-const PoffinHouse = styled.img`
+const Icon = styled.img`
   width: 50%;
   height: auto;
   align-self: center;
+  &:hover {
+    cursor: pointer;
+  };
 `;
 
-const Gym = styled.img`
-  width: 50%;
-  height: auto;
-  align-self: center;
-`;
 
-const PokemonCenter = styled.img`
-  width: 50%;
-  height: auto;
-  align-self: center;
-`;
+const shake = keyframes`{
+  0% { transform: translate(1px, 1px) rotate(0deg); }
+  10% { transform: translate(-1px, -2px) rotate(-1deg); }
+  20% { transform: translate(-3px, 0px) rotate(1deg); }
+  30% { transform: translate(3px, 2px) rotate(0deg); }
+  40% { transform: translate(1px, -1px) rotate(1deg); }
+  50% { transform: translate(-1px, 2px) rotate(-1deg); }
+  60% { transform: translate(-3px, 1px) rotate(0deg); }
+  70% { transform: translate(3px, 1px) rotate(-1deg); }
+  80% { transform: translate(-1px, -1px) rotate(1deg); }
+  90% { transform: translate(1px, 2px) rotate(0deg); }
+  100% { transform: translate(1px, -2px) rotate(-1deg); }
+}`;

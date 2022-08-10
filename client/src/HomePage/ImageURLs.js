@@ -2,5 +2,14 @@ module.exports = {
   gym: "http://images6.fanpop.com/image/articles/249000/pokemon_249744_1.png?cache=1444245510",
   poffin: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/63/Poffin.png/1024px-Poffin.png",
   background: "https://i.pinimg.com/originals/5e/fc/94/5efc94c50eb23675465c902b29330b38.png",
-  pkmncenter: "https://www.models-resource.com/resources/big_icons/12/12016.png"
+  pkmncenter: "https://www.models-resource.com/resources/big_icons/12/12016.png",
+  gymBackground: "https://os-cdn.ec-ffmt.com/gl/pokemon/dedicate/pattern-flat/107.jpg",
+  stone: "https://archives.bulbagarden.net/media/upload/thumb/6/63/Stone_Badge.png/120px-Stone_Badge.png",
+  knuckle: "https://archives.bulbagarden.net/media/upload/thumb/9/97/Knuckle_Badge.png/120px-Knuckle_Badge.png",
+  dynamo: "https://archives.bulbagarden.net/media/upload/thumb/3/34/Dynamo_Badge.png/120px-Dynamo_Badge.png",
+  heat: "https://archives.bulbagarden.net/media/upload/thumb/c/c4/Heat_Badge.png/120px-Heat_Badge.png",
+  balance: "https://archives.bulbagarden.net/media/upload/thumb/6/63/Balance_Badge.png/120px-Balance_Badge.png",
+  feather: "https://archives.bulbagarden.net/media/upload/thumb/6/62/Feather_Badge.png/120px-Feather_Badge.png",
+  mind: "https://archives.bulbagarden.net/media/upload/thumb/c/cc/Mind_Badge.png/120px-Mind_Badge.png",
+  rain: "https://archives.bulbagarden.net/media/upload/thumb/9/9b/Rain_Badge.png/120px-Rain_Badge.png",
 }
