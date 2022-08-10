@@ -12,7 +12,7 @@ const Gym = (props) => {
   const [submit, setSubmit] = useState(false);
 
   const current = new Date();
-  const date = `${current.getMonth() + 1}-${current.getDate()}-${current.getFullYear()}`
+  const date = `${current.getFullYear()}-${current.getMonth() + 1}-${current.getDate()}`
 
   const toggleAddModal = (e) => {
     e.preventDefault();

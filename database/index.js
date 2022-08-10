@@ -33,6 +33,18 @@ const postExerciseData = (info) => {
     SELECT (SELECT id FROM exercises WHERE name = '${info.name}'), ${info.data[i].setNum}, ${info.data[i].lbs}, ${info.data[i].reps}, '${info.date}'
   `)
   };
+};
+
+const getPrev = (name) => {
+  return pool.query(`
+    SELECT E.name, D.date, JSON_AGG(JSON_BUILD_OBJECT('setNum', D.set_num, 'lbs', D.lbs, 'reps', D.reps))
+    FROM exercises E
+    LEFT JOIN exercises_data D on E.id = D.exercise_id
+    where E.name = '${name}' AND date = (
+      SELECT date FROM exercises_data WHERE date > current_date::text ORDER BY date DESC LIMIT 1
+    )
+    GROUP BY E.name, D.date
+  `);
 }
 
-module.exports = { pool, postExercise, postExerciseData }
+module.exports = { pool, postExercise, postExerciseData, getPrev }
