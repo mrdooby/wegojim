@@ -3,7 +3,7 @@ import axios from 'axios';
 
 const Tracker = (props) => {
   const [setNum, setSetNum] = useState([{set: 1}]);
-  const [prev, setPrev] = useState([{prev: 'lbs x reps'}]);
+  const [prev, setPrev] = useState([{prev: '-'}]);
   const [lbs, setLbs] = useState([{lbs: ''}]);
   const [reps, setReps] = useState([{reps: ''}]);
   const [data, setData] = ([]);
@@ -11,7 +11,15 @@ const Tracker = (props) => {
   useEffect(() => {
     axios.get('/wegojim/gym/prev', {params: {exercise_name: props.name}})
     .then((res) => {
-      console.log('prev', res.data)
+      var temp = [];
+      for (let i = 0; i < res.data[0]['prev'].length; i++) {
+        let obj = {prev: `${res.data[0]['prev'][i].lbs} lbs x ${res.data[0]['prev'][i].reps} reps`}
+        temp.push(obj);
+      }
+      return temp;
+    })
+    .then((temp) => {
+      setPrev(temp);
     })
     .catch((err) => {
       console.log('err', err)
@@ -56,7 +64,7 @@ const Tracker = (props) => {
   const handleAddSet = (e) => {
     e.preventDefault();
     setSetNum([...setNum, {set: setNum[setNum.length - 1]['set'] + 1}]);
-    setPrev([...prev, {prev: 'lbs x reps'}]);
+    setPrev([...prev, {prev: '-'}]);
     setLbs([...lbs, {lbs: ''}]);
     setReps([...reps, {reps: ''}]);
   };
@@ -71,6 +79,7 @@ const Tracker = (props) => {
 
   return (
     <form>
+      {console.log('prev', prev)}
       <p>{props.name}</p>
       <div>Set</div>
         {setNum.map((e, i) => {
@@ -78,7 +87,9 @@ const Tracker = (props) => {
         })}
       <div>Previous (lbs x reps)</div>
         {prev.map((e, i) => {
-          return <div key={'prev' + i}>{e.prev}</div>
+          if (i < setNum.length) {
+            return <div key={'prev' + i}>{e.prev}</div>
+          }
         })}
       <div>lbs</div>
         {lbs.map((e, i) => {

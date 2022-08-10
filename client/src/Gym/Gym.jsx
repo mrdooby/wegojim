@@ -27,8 +27,7 @@ const Gym = (props) => {
 
   const handleFinish = async () => {
     setSubmit(true);
-    // axios.post('/gym', exercise)
-    console.log('exercise', exercise)
+    axios.post('/gym', exercise)
   };
 
   return (

@@ -37,7 +37,7 @@ const postExerciseData = (info) => {
 
 const getPrev = (name) => {
   return pool.query(`
-    SELECT E.name, D.date, JSON_AGG(JSON_BUILD_OBJECT('setNum', D.set_num, 'lbs', D.lbs, 'reps', D.reps))
+    SELECT E.name, D.date, JSON_AGG(JSON_BUILD_OBJECT('setNum', D.set_num, 'lbs', D.lbs, 'reps', D.reps)) as prev
     FROM exercises E
     LEFT JOIN exercises_data D on E.id = D.exercise_id
     where E.name = '${name}' AND date = (
