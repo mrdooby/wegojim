@@ -9,6 +9,16 @@ const Tracker = (props) => {
   const [data, setData] = ([]);
 
   useEffect(() => {
+    axios.get('/wegojim/gym/prev', {params: {exercise_name: props.name}})
+    .then((res) => {
+      console.log('prev', res.data)
+    })
+    .catch((err) => {
+      console.log('err', err)
+    })
+  }, [props.name])
+
+  useEffect(() => {
     concatData()
     .then((result) => {
       addFinalData(result);

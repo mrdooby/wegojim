@@ -11,6 +11,7 @@ const postExercise = (req, res) => {
 };
 
 const getPrev = (req, res) => {
+  console.log(req.query.exercise_name)
   db.getPrev(req.query.exercise_name)
   .then((result) => {
     res.send(result.rows)

@@ -2,7 +2,7 @@
   "name": "wegojim",
   "version": "1.0.0",
   "description": "A Pokémon trainer's tool to beat the Elite Four.",
-  "main": "server/index.js",
+  "main": "serve/index.js",
   "scripts": {
     "server-start": "nodemon server.js -w",
     "client-start": "webpack --config webpack.config.js -w",
