@@ -38,3 +38,13 @@ group by e.name, d.date;
     GROUP BY E.name, D.date
 
 select distinct name from exercises;
+
+select json_build_array(
+  (select id from exercises_data where date='8-6-2022' limit 1),
+  (select id from exercises_data where date='8-7-2022' limit 1),
+  (select id from exercises_data where date='8-8-2022' limit 1),
+  (select id from exercises_data where date='8-9-2022' limit 1),
+  (select id from exercises_data where date='8-10-2022' limit 1),
+  (select id from exercises_data where date='8-11-2022' limit 1),
+  (select id from exercises_data where date='8-12-2022' limit 1)
+) as badge_check;

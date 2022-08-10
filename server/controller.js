@@ -14,15 +14,22 @@ const getPrev = (req, res) => {
   console.log(req.query.exercise_name)
   db.getPrev(req.query.exercise_name)
   .then((result) => {
-    res.send(result.rows)
+    res.json(result.rows)
   })
 };
 
 const getNames = (req, res) => {
   db.getNames()
   .then((result) => {
-    res.send(result.rows)
+    res.json(result.rows)
   })
 };
 
-module.exports = { postExercise, getPrev, getNames }
+const badgeCheck = (req, res) => {
+  db.badgeCheck(req.query)
+  .then((result) => {
+    res.json(result.rows[0].badge_check)
+  })
+}
+
+module.exports = { postExercise, getPrev, getNames, badgeCheck }

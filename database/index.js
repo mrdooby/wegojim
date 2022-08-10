@@ -54,4 +54,17 @@ const getNames = () => {
   `);
 };
 
-module.exports = { pool, postExercise, postExerciseData, getPrev, getNames}
+const badgeCheck = (query) => {
+  return pool.query(`select json_build_array(
+    (select id from exercises_data where date='${query.sun}' limit 1),
+    (select id from exercises_data where date='${query.mon}' limit 1),
+    (select id from exercises_data where date='${query.tues}' limit 1),
+    (select id from exercises_data where date='${query.wed}' limit 1),
+    (select id from exercises_data where date='${query.thurs}' limit 1),
+    (select id from exercises_data where date='${query.fri}' limit 1),
+    (select id from exercises_data where date='${query.sat}' limit 1)
+  ) as badge_check
+  `);
+}
+
+module.exports = { pool, postExercise, postExerciseData, getPrev, getNames, badgeCheck}
