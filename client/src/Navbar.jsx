@@ -22,6 +22,10 @@ const NavbarContainer = styled.div`
   display: flex;
   flex-direction: row;
   border: 3px solid;
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  background-color: white;
 `;
 
 const Title = styled.p`
