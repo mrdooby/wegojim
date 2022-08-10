@@ -99,7 +99,7 @@ const Tracker = (props) => {
       {reps.map((e, i) => {
         return <input type="number" key={'reps' + i} onChange={(e) => handleRepsChange(e, i)}></input>
       })}
-      <button onClick={handleAddSet}>add set</button>
+      <button onClick={handleAddSet}>Add Set</button>
     </form>
   )
 };

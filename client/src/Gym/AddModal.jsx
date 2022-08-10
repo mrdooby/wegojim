@@ -5,10 +5,24 @@ const AddModal = (props) => {
   const [name, setName] = useState('');
   const [category, setCategory] = useState('Barbell');
   const [bodyPart, setBodyPart] = useState('Core');
+  const [prevNames, setPrevNames] = useState()
+
+  useEffect(() => {
+    axios.get('/wegojim/gym/names')
+    .then((res) => {
+      console.log('prev names', res.data)
+      setPrevNames(res.data);
+    })
+  }, [props.toggleModal]);
 
   const handleClick = (e) => {
     e.preventDefault();
     props.setExercise([...props.exercise, {name: name, category: category, bodyPart: bodyPart, date: props.date}]);
+    props.setToggleModal(false);
+  };
+
+  const handleSelectPrevName = (e) => {
+    props.setExercise([...props.exercise, {name: e.name, category: e.category, bodyPart: e.body_part, date: props.date}]);
     props.setToggleModal(false);
   };
 
@@ -37,6 +51,14 @@ const AddModal = (props) => {
         <option value="Duration">Duration</option>
       </select>
       <div>Previous Exercises</div>
+          {prevNames?.map((e) => {
+            return(
+            <div onClick={(event) => {handleSelectPrevName(e)}}>
+              <p>{e.name}</p>
+              <p>{e.body_part}</p>
+              <p>{e.category}</p>
+            </div>
+          )})}
       <button onClick={handleClick}>Add</button>
     </div>
   )

@@ -45,6 +45,13 @@ const getPrev = (name) => {
     )
     GROUP BY E.name, D.date
   `);
-}
+};
 
-module.exports = { pool, postExercise, postExerciseData, getPrev }
+const getNames = () => {
+  return pool.query(`
+    SELECT DISTINCT name, body_part, category
+    FROM exercises
+  `);
+};
+
+module.exports = { pool, postExercise, postExerciseData, getPrev, getNames}

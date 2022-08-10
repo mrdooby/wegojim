@@ -32,6 +32,7 @@ const Gym = (props) => {
 
   return (
     <div>
+      {console.log('exercise', exercise)}
       <Badges/>
       <GymTitle/>
       {exercise.map((e, i) => {
@@ -39,7 +40,7 @@ const Gym = (props) => {
       })}
       <button onClick={toggleAddModal}>Add Exercise</button>
       <>
-        {toggleModal ? <AddModal exercise={exercise} setExercise={setExercise} setToggleModal={setToggleModal} date={date}/> : null}
+        {toggleModal ? <AddModal exercise={exercise} setExercise={setExercise} setToggleModal={setToggleModal} date={date} toggleModal={toggleModal}/> : null}
       </>
       <button onClick={(e) => {handleReset()}}>Cancel Workout</button>
       <button onClick={(e) => {handleFinish().then(()=>{handleReset()})}}>Finish Workout</button>

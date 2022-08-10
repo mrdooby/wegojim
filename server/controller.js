@@ -16,6 +16,13 @@ const getPrev = (req, res) => {
   .then((result) => {
     res.send(result.rows)
   })
-}
+};
 
-module.exports = { postExercise, getPrev }
+const getNames = (req, res) => {
+  db.getNames()
+  .then((result) => {
+    res.send(result.rows)
+  })
+};
+
+module.exports = { postExercise, getPrev, getNames }
