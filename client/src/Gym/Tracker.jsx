@@ -24,8 +24,7 @@ const Tracker = (props) => {
       let setData = {
         "setNum": setNum[i].set,
         "lbs": lbs[i]['lbs'],
-        "reps": reps[i]['reps'],
-        "format": `${lbs[i]['lbs']} lbs x ${reps[i]['reps']} reps`
+        "reps": reps[i]['reps']
       }
       result.push(setData);
     }
@@ -73,11 +72,11 @@ const Tracker = (props) => {
         })}
       <div>lbs</div>
         {lbs.map((e, i) => {
-          return <input key={'lbs' + i} onChange={(e) => {handleLbsChange(e, i)}}></input>
+          return <input type="number" key={'lbs' + i} onChange={(e) => {handleLbsChange(e, i)}}></input>
         })}
       <div>reps</div>
       {reps.map((e, i) => {
-        return <input key={'reps' + i} onChange={(e) => handleRepsChange(e, i)}></input>
+        return <input type="number" key={'reps' + i} onChange={(e) => handleRepsChange(e, i)}></input>
       })}
       <button onClick={handleAddSet}>add set</button>
     </form>

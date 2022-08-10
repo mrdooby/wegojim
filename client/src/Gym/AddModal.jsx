@@ -8,7 +8,7 @@ const AddModal = (props) => {
 
   const handleClick = (e) => {
     e.preventDefault();
-    props.setExercise([...props.exercise, {name: name, category: category, bodyPart: bodyPart}]);
+    props.setExercise([...props.exercise, {name: name, category: category, bodyPart: bodyPart, date: props.date}]);
     props.setToggleModal(false);
   };
 

@@ -11,34 +11,39 @@ const Gym = (props) => {
   const [toggleModal, setToggleModal] = useState(false);
   const [submit, setSubmit] = useState(false);
 
+  const current = new Date();
+  const date = `${current.getMonth() + 1}-${current.getDate()}-${current.getFullYear()}`
+
   const toggleAddModal = (e) => {
     e.preventDefault();
     setToggleModal(true);
   };
 
-  const handleReset = (e) => {
-    e.preventDefault();
+  const handleReset = async () => {
     setExercise([]);
+    setToggleModal(false);
+    setSubmit(false);
   };
 
-  const handleFinish = (e) => {
+  const handleFinish = async () => {
     setSubmit(true);
+    // axios.post('/gym', exercise)
+    console.log('exercise', exercise)
   };
 
   return (
     <div>
-      {console.log('exercise', exercise)}
       <Badges/>
       <GymTitle/>
       {exercise.map((e, i) => {
-        return <Tracker key={'tracker' + i} exercise={exercise} setExercise={setExercise} name={e.name} submit={submit}/>
+        return <Tracker key={'tracker' + i} exercise={exercise} setExercise={setExercise} name={e.name} submit={submit} date={date}/>
       })}
       <button onClick={toggleAddModal}>Add Exercise</button>
       <>
-        {toggleModal ? <AddModal exercise={exercise} setExercise={setExercise} setToggleModal={setToggleModal}/> : null}
+        {toggleModal ? <AddModal exercise={exercise} setExercise={setExercise} setToggleModal={setToggleModal} date={date}/> : null}
       </>
-      <button onClick={handleReset}>Cancel Workout</button>
-      <button onClick={handleFinish}>Finish Workout</button>
+      <button onClick={(e) => {handleReset()}}>Cancel Workout</button>
+      <button onClick={(e) => {handleFinish().then(()=>{handleReset()})}}>Finish Workout</button>
     </div>
   );
 };
