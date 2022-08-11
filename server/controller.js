@@ -36,6 +36,13 @@ const getExerciseId = (req, res) => {
   .then((result) => {
     res.json(result.rows[0]["json_agg"])
   })
+};
+
+const getSpecificName = (req, res) => {
+  db.getSpecificName(req.query.pkmn_id)
+  .then((result) => {
+    res.json(result.rows[0].name)
+  })
 }
 
-module.exports = { postExercise, getPrev, getNames, badgeCheck, getExerciseId }
+module.exports = { postExercise, getPrev, getNames, badgeCheck, getExerciseId, getSpecificName }

@@ -2,17 +2,27 @@ import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
 const PkmnDataModal = (props) => {
+  const [exerciseName, setExerciseName] = useState();
+
+  useEffect(() => {
+    axios.get('/wegojim/pkmnctr/name', {params: {pkmn_id: props.pkmnId}})
+    .then((res) => {
+      setExerciseName(res.data)
+    })
+  }, [props.pkmnId])
 
   const handleReset = (e) => {
     e.preventDefault();
-    props.setToggleModal(false);
-  }
+    props.setToggleModal({bool: false, pkmnId: 0});
+  };
 
   return (
     <PkmnDataModalBackground>
         <PkmnDataModalContainer>
           <Exit onClick={handleReset}> X </Exit>
-            <PkmnData>hello {props.pkmnId}</PkmnData>
+            <PkmnData>
+              <ExerciseName>{exerciseName}</ExerciseName>
+            </PkmnData>
         </PkmnDataModalContainer>
     </PkmnDataModalBackground>
   )
@@ -66,4 +76,8 @@ const Exit = styled.div`
 `;
 
 const PkmnData = styled.div`
+`;
+
+const ExerciseName = styled.div`
+
 `;

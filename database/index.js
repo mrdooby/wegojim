@@ -53,8 +53,16 @@ const getPrev = (name) => {
 
 const getNames = () => {
   return pool.query(`
-    SELECT DISTINCT name, body_part, category
+    SELECT name
     FROM exercises
+  `);
+};
+
+const getSpecificName = (pkmnId) => {
+  return pool.query(`
+    SELECT name
+    FROM exercises
+    WHERE id=${pkmnId}
   `);
 };
 
@@ -77,5 +85,5 @@ const getExerciseId = () => {
   `);
 };
 
-module.exports = { pool, postExercise, postExerciseData, getPrev, getNames, badgeCheck, getExerciseId}
+module.exports = { pool, postExercise, postExerciseData, getPrev, getNames, badgeCheck, getExerciseId, getSpecificName }
 
