@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
+import img from '../HomePage/ImageURLs.js';
 
 const AddModal = (props) => {
   const [name, setName] = useState('');
@@ -38,41 +39,47 @@ const AddModal = (props) => {
   return (
     <AddModalBackground>
       <AddModalContainer>
-        <AddModalBody>
-          <button onClick={handleReset}> X </button>
-          <label>Exercise Name</label>
-          <input onChange={(e) => {setName(e.target.value)}}></input>
-          <label>Body Part</label>
-          <select id="BodyPart" onChange={(e) => {setBodyPart(e.target.value)}}>
-            <option value="Core">Core</option>
-            <option value="Arms">Arms</option>
-            <option value="Back">Back</option>
-            <option value="Chest">Chest</option>
-            <option value="Legs">Legs</option>
-            <option value="Shoulders">Shoulders</option>
-            <option value="Full Body">Full Body</option>
-            <option value="Cardio">Cardio</option>
-          </select>
-          <label>Category</label>
-          <select id="Category" onChange={(e) => {setCategory(e.target.value)}}>
-            <option value="Barbell">Barbell</option>
-            <option value="Dumbell">Dumbell</option>
-            <option value="Machine">Machine</option>
-            <option value="Weighted Bodyweight">Weighted Bodyweight</option>
-            <option value="Assisted Bodyweight">Assisted Bodyweight</option>
-            <option value="Duration">Duration</option>
-          </select>
-          <div>Previous Exercises</div>
-              {prevNames?.map((e) => {
-                return(
-                <div onClick={(event) => {handleSelectPrevName(e)}}>
-                  <p>{e.name}</p>
-                  <p>{e.body_part}</p>
-                  <p>{e.category}</p>
-                </div>
-              )})}
-          <button onClick={handleClick}>Add</button>
-        </AddModalBody>
+          <Exit onClick={handleReset}> X </Exit>
+            <PreviousExercises>
+              <PreviousTitleContainer>
+                <PreviousTitle>Previous Exercises</PreviousTitle>
+              </PreviousTitleContainer>
+              <BiggerContainer>
+                {prevNames?.map((e, i) => {
+                    return(
+                    <PrevExerciseNameContainer key = {"prev" + i}onClick={(event) => {handleSelectPrevName(e)}}>
+                      <div>{e.name}</div>
+                    </PrevExerciseNameContainer>
+                )})}
+              </BiggerContainer>
+            </PreviousExercises>
+            <NewForm>
+              <div>Exercise Name</div>
+              <input onChange={(e) => {setName(e.target.value)}}></input>
+              <label>Body Part</label>
+              <select id="BodyPart" onChange={(e) => {setBodyPart(e.target.value)}}>
+                <option value="Core">Core</option>
+                <option value="Arms">Arms</option>
+                <option value="Back">Back</option>
+                <option value="Chest">Chest</option>
+                <option value="Legs">Legs</option>
+                <option value="Shoulders">Shoulders</option>
+                <option value="Full Body">Full Body</option>
+                <option value="Cardio">Cardio</option>
+              </select>
+              <div>Category</div>
+              <select id="Category" onChange={(e) => {setCategory(e.target.value)}}>
+                <option value="Barbell">Barbell</option>
+                <option value="Dumbell">Dumbell</option>
+                <option value="Machine">Machine</option>
+                <option value="Weighted Bodyweight">Weighted Bodyweight</option>
+                <option value="Assisted Bodyweight">Assisted Bodyweight</option>
+                <option value="Duration">Duration</option>
+              </select>
+              <AddContainer>
+                <Add onClick={handleClick}>Add</Add>
+            </AddContainer>
+            </NewForm>
       </AddModalContainer>
     </AddModalBackground>
   )
@@ -82,7 +89,6 @@ export default AddModal;
 
 // styled components
 const AddModalBackground = styled.div`
-  backdrop-filter: blur(8px);
   display: block;
   position: fixed;
   z-index: 3;
@@ -108,8 +114,76 @@ const AddModalContainer = styled.div`
   text-align: center;
   width: 60%;
   height: 60%;
-  border: #8b3726 solid 3px;
 `;
 
-const AddModalBody = styled.div`
+const Exit = styled.button`
+  position: fixed;
+  top: 0;
+  right 0;
+  margin: 5px;
+  z-index: 1;
+`;
+
+const AddContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  width: 70%;
+`;
+
+const Add = styled.div`
+  width: 70%;
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  background-color: white;
+`;
+
+const NewForm = styled.section`
+  width: 70%;
+  position: fixed;
+  top: 0;
+  right: 0;
+`;
+
+const PreviousExercises = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-image: url(${img.addModalBackground});
+  background-size: 125%;
+  width: 30%;
+  height: 100%;
+  overflow: auto;
+`;
+
+const PreviousTitleContainer = styled.div`
+  margin: 5px;
+  border: solid black;
+  background-color: white;
+  border-radius: 5px;
+`;
+
+const PreviousTitle = styled.h3`
+
+`;
+
+const PrevExerciseNameContainer = styled.div`
+  display: flex;
+  border: solid black;
+  margin: 5px;
+  background-color: white;
+  justify-content: center;
+  :hover {
+    background-color: #ecd49c;
+    cursor: pointer;
+  }
+  border-radius: 5px;
+
+`;
+
+const BiggerContainer = styled.div`
+display: flex;
+align-content: center;
+flex-direction: column;
+justify-content: center;
 `;
