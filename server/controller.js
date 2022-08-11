@@ -1,7 +1,6 @@
 const db = require('../database/index.js');
 
 const postExercise = (req, res) => {
-console.log(req.body)
   for (let i = 0; i < req.body.length; i++) {
     db.postExercise(req.body[i])
     .then(() => {
@@ -12,7 +11,6 @@ console.log(req.body)
 };
 
 const getPrev = (req, res) => {
-  console.log(req.query.exercise_name)
   db.getPrev(req.query.exercise_name)
   .then((result) => {
     res.json(result.rows)
@@ -31,6 +29,13 @@ const badgeCheck = (req, res) => {
   .then((result) => {
     res.json(result.rows[0].badge_check)
   })
+};
+
+const getExerciseId = (req, res) => {
+  db.getExerciseId()
+  .then((result) => {
+    res.json(result.rows[0]["json_agg"])
+  })
 }
 
-module.exports = { postExercise, getPrev, getNames, badgeCheck }
+module.exports = { postExercise, getPrev, getNames, badgeCheck, getExerciseId }

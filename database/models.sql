@@ -48,3 +48,18 @@ select json_build_array(
   (select id from exercises_data where date='8-11-2022' limit 1),
   (select id from exercises_data where date='8-12-2022' limit 1)
 ) as badge_check;
+
+create unique index exercises_data_set_num_unique
+on (exercises_data(set_num), exercises_data(exercise_id), exercises_data(date));
+
+alter table exercises_data
+add constraint exercises_data_set_num_unique
+unique (set_num, exercise_id, date);
+
+    SELECT E.name, D.date, JSON_AGG(JSON_BUILD_OBJECT('setNum', D.set_num, 'lbs', D.lbs, 'reps', D.reps)) as prev
+    FROM exercises E
+    LEFT JOIN exercises_data D on E.id = D.exercise_id
+    where E.name = 'bench press' AND date = (
+      SELECT date FROM exercises_data WHERE date > current_date::text ORDER BY date DESC LIMIT 1
+    )
+    GROUP BY E.name, D.date;

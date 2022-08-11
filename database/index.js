@@ -69,6 +69,13 @@ const badgeCheck = (query) => {
     (select id from exercises_data where date='${query.sat}' limit 1)
   ) as badge_check
   `);
-}
+};
 
-module.exports = { pool, postExercise, postExerciseData, getPrev, getNames, badgeCheck}
+const getExerciseId = () => {
+  return pool.query(`
+    SELECT JSON_AGG(id) FROM exercises;
+  `);
+};
+
+module.exports = { pool, postExercise, postExerciseData, getPrev, getNames, badgeCheck, getExerciseId}
+
