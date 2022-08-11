@@ -63,3 +63,7 @@ unique (set_num, exercise_id, date);
       SELECT date FROM exercises_data WHERE date > current_date::text ORDER BY date DESC LIMIT 1
     )
     GROUP BY E.name, D.date;
+
+    // get all exercise id
+
+  select json_agg(id) from exercises;

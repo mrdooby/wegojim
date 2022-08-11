@@ -1,9 +1,11 @@
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
+import PkmnDataModal from './PkmnDataModal.jsx';
 
 const PokemonCenter = (props) => {
   const [exerciseId, setExerciseId] = useState();
+  const [toggleModal, setToggleModal] = useState({bool: false, pkmnId: 0});
 
   useEffect(() => {
     axios.get('/wegojim/pkmnctr')
@@ -27,10 +29,15 @@ const PokemonCenter = (props) => {
       <StorageContainer>
         <PokemonContainer>
           {exerciseId?.map((e, i) => {
-            return <PokemonSprite key={'id ' + i}src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${e}.png`}></PokemonSprite>
+            return <PokemonSprite
+              key={'id ' + i}
+              src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${e}.png`}
+              onClick={(event) => {setToggleModal({bool: true, pkmnId: e})}}
+            ></PokemonSprite>
           })}
         </PokemonContainer>
       </StorageContainer>
+      {toggleModal.bool ? <PkmnDataModal setToggleModal={setToggleModal} pkmnId={toggleModal.pkmnId}/> : null}
     </BoxContainer>
   )
 };
@@ -55,7 +62,6 @@ const BoxImage = styled.img`
 
 const TitleContainer = styled.div`
   position: absolute;
-  border: solid black;
   top: 10%;
   width: 54%;
   height: 18%;
@@ -64,7 +70,6 @@ const TitleContainer = styled.div`
 
 const StorageContainer = styled.div`
   position: absolute;
-  border: solid black;
   top: 38%;
   width: 74%;
   height: 110%;
@@ -84,6 +89,9 @@ const PokemonContainer = styled.div`
 `;
 
 const PokemonSprite = styled.img`
-  margin-left: 2.4%;
-  margin-top: 2%;
+  width: 20%;
+  height: auto;
+  :hover {
+    cursor: pointer;
+  };
 `;
