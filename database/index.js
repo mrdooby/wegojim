@@ -23,6 +23,8 @@ const postExercise = (info) => {
   return pool.query(`
       INSERT INTO exercises (name, body_part, category)
       SELECT '${info.name}', '${info.bodyPart}', '${info.category}'
+      ON CONFLICT (name)
+      DO NOTHING
       `);
 };
 
@@ -31,6 +33,8 @@ const postExerciseData = (info) => {
     pool.query(`
     INSERT INTO exercises_data (exercise_id, set_num, lbs, reps, date)
     SELECT (SELECT id FROM exercises WHERE name = '${info.name}'), ${info.data[i].setNum}, ${info.data[i].lbs}, ${info.data[i].reps}, '${info.date}'
+    ON CONFLICT (set_num, exercise_id, date)
+    DO NOTHING
   `)
   };
 };

@@ -83,11 +83,13 @@ const AddModal = (props) => {
               <BigContainer>
                 <SectionContainer>
                   <SectionName>Exercise Name</SectionName>
-                  {/* <NewInput onChange={(e) => {setName(e.target.value)}}></NewInput> */}
-                  <CreatableSelect
-                    isClearable
-                    onChange={setName}
-                  />
+                  <NewSelectContainer >
+                    <CreatableSelect
+                      isClearable
+                      onChange={setName}
+                      placeholder={<div>Type exercise name...</div>}
+                    />
+                  </NewSelectContainer >
                 </SectionContainer><br></br>
                 <SectionContainer>
                   <SectionName>Body Part</SectionName>

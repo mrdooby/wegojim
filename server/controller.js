@@ -1,13 +1,14 @@
 const db = require('../database/index.js');
 
 const postExercise = (req, res) => {
+console.log(req.body)
   for (let i = 0; i < req.body.length; i++) {
     db.postExercise(req.body[i])
     .then(() => {
       db.postExerciseData(req.body[i])
     })
   };
-  res.status(200).send('post successful');
+  res.status(200).send(req.body);
 };
 
 const getPrev = (req, res) => {

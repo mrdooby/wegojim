@@ -62,11 +62,8 @@ const Gym = (props) => {
 
   const handleFinish = async () => {
     setSubmit(true);
-    let badgeArray = dayOfWk;
-    badgeArray[current.getDay()] = true;
-    setDayOfWk(badgeArray);
-    axios.post('/gym', exercise)
-    .then(() => {handleReset()});
+    axios.post('/wegojim/gym', exercise)
+    .then(() => {console.log('posted')});
   };
 
   return (
