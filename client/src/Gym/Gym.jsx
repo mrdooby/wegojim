@@ -72,6 +72,7 @@ const Gym = (props) => {
   return (
     <GymContainer toggleModal={toggleModal}>
       <div>
+        {console.log(exercise)}
         <Badges dayOfWk={dayOfWk}/>
         <WorkoutDayTitle>{weekday[current.getDay()]} Badge</WorkoutDayTitle>
         {exercise.map((e, i) => {

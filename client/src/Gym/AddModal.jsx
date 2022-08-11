@@ -2,12 +2,33 @@ import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
 import img from '../HomePage/ImageURLs.js';
+import Select from 'react-select';
 
 const AddModal = (props) => {
   const [name, setName] = useState('');
-  const [category, setCategory] = useState('Barbell');
-  const [bodyPart, setBodyPart] = useState('Core');
+  const [category, setCategory] = useState({value: "Barbell", label: "Barbell"});
+  const [bodyPart, setBodyPart] = useState({value: "Core", label: "Core"});
   const [prevNames, setPrevNames] = useState()
+
+  const catOptions = [
+    {value: "Barbell", label: "Barbell"},
+    {value: "Dumbell", label: "Dumbell"},
+    {value: "Machine", label: "Machine"},
+    {value: "Weighted Bodyweight", label: "Weighted Bodyweight"},
+    {value: "Assisted Bodyweight", label: "Assisted Bodyweight"},
+    {value: "Duration", label: "Duration"},
+  ];
+
+  const bodyOptions = [
+    {value: "Core", label: "Core"},
+    {value: "Arms", label: "Arms"},
+    {value: "Back", label: "Back"},
+    {value: "Chest", label: "Chest"},
+    {value: "Legs", label: "Legs"},
+    {value: "Shoulders", label: "Shoulders"},
+    {value: "Full Body", label: "Full Body"},
+    {value: "Cardio", label: "Cardio"}
+  ];
 
   useEffect(() => {
     axios.get('/wegojim/gym/names')
@@ -19,7 +40,7 @@ const AddModal = (props) => {
 
   const handleClick = (e) => {
     e.preventDefault();
-    props.setExercise([...props.exercise, {name: name, category: category, bodyPart: bodyPart, date: props.date}]);
+    props.setExercise([...props.exercise, {name: name, category: category.value, bodyPart: bodyPart.value, date: props.date}]);
     props.setToggleModal(false);
   };
 
@@ -41,6 +62,8 @@ const AddModal = (props) => {
       <AddModalContainer>
           <Exit onClick={handleReset}> X </Exit>
             <PreviousExercises>
+              {console.log('cat', category)}
+              {console.log('body', bodyPart)}
               <PreviousTitleContainer>
                 <h1>Previous Exercises</h1>
               </PreviousTitleContainer>
@@ -64,27 +87,23 @@ const AddModal = (props) => {
                 </SectionContainer><br></br>
                 <SectionContainer>
                   <SectionName>Body Part</SectionName>
-                  <NewSelect id="BodyPart" onChange={(e) => {setBodyPart(e.target.value)}}>
-                    <option value="Core">Core</option>
-                    <option value="Arms">Arms</option>
-                    <option value="Back">Back</option>
-                    <option value="Chest">Chest</option>
-                    <option value="Legs">Legs</option>
-                    <option value="Shoulders">Shoulders</option>
-                    <option value="Full Body">Full Body</option>
-                    <option value="Cardio">Cardio</option>
-                  </NewSelect>
+                  <NewSelectContainer >
+                    <Select
+                      defaultValue={bodyPart}
+                      options={bodyOptions}
+                      onChange={setBodyPart}
+                    />
+                  </NewSelectContainer>
                 </SectionContainer><br></br>
                 <SectionContainer>
                   <SectionName>Category</SectionName>
-                  <NewSelect id="Category" onChange={(e) => {setCategory(e.target.value)}}>
-                    <option value="Barbell">Barbell</option>
-                    <option value="Dumbell">Dumbell</option>
-                    <option value="Machine">Machine</option>
-                    <option value="Weighted Bodyweight">Weighted Bodyweight</option>
-                    <option value="Assisted Bodyweight">Assisted Bodyweight</option>
-                    <option value="Duration">Duration</option>
-                  </NewSelect>
+                  <NewSelectContainer>
+                    <Select
+                      defaultValue={category}
+                      options={catOptions}
+                      onChange={setCategory}
+                    />
+                  </NewSelectContainer>
                 </SectionContainer><br></br>
                 <AddContainer>
                   <Add onClick={handleClick}>Add</Add>
@@ -228,7 +247,7 @@ const NewInput = styled.input`
   height: auto;
 `;
 
-const NewSelect = styled.select`
+const NewSelectContainer = styled.div`
   position: fixed;
   right: 0;
   width: 30%;
@@ -247,3 +266,4 @@ const BigContainer = styled.div`
   justify-content: space-around;
   height: auto;
 `;
+
