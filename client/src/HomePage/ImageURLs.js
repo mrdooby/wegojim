@@ -12,5 +12,5 @@ module.exports = {
   feather: "https://archives.bulbagarden.net/media/upload/thumb/6/62/Feather_Badge.png/120px-Feather_Badge.png",
   mind: "https://archives.bulbagarden.net/media/upload/thumb/c/cc/Mind_Badge.png/120px-Mind_Badge.png",
   rain: "https://archives.bulbagarden.net/media/upload/thumb/9/9b/Rain_Badge.png/120px-Rain_Badge.png",
-  addModalBackground: "https://os-cdn.ec-ffmt.com/gl/pokemon/dedicate/pattern-flat/106.jpg",
+  addModalBackground: "https://os-cdn.ec-ffmt.com/gl/pokemon/dedicate/pattern-flat/68.jpg",
 }

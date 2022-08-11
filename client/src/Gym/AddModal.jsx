@@ -42,7 +42,7 @@ const AddModal = (props) => {
           <Exit onClick={handleReset}> X </Exit>
             <PreviousExercises>
               <PreviousTitleContainer>
-                <PreviousTitle>Previous Exercises</PreviousTitle>
+                <h1>Previous Exercises</h1>
               </PreviousTitleContainer>
               <BiggerContainer>
                 {prevNames?.map((e, i) => {
@@ -54,31 +54,42 @@ const AddModal = (props) => {
               </BiggerContainer>
             </PreviousExercises>
             <NewForm>
-              <div>Exercise Name</div>
-              <input onChange={(e) => {setName(e.target.value)}}></input>
-              <label>Body Part</label>
-              <select id="BodyPart" onChange={(e) => {setBodyPart(e.target.value)}}>
-                <option value="Core">Core</option>
-                <option value="Arms">Arms</option>
-                <option value="Back">Back</option>
-                <option value="Chest">Chest</option>
-                <option value="Legs">Legs</option>
-                <option value="Shoulders">Shoulders</option>
-                <option value="Full Body">Full Body</option>
-                <option value="Cardio">Cardio</option>
-              </select>
-              <div>Category</div>
-              <select id="Category" onChange={(e) => {setCategory(e.target.value)}}>
-                <option value="Barbell">Barbell</option>
-                <option value="Dumbell">Dumbell</option>
-                <option value="Machine">Machine</option>
-                <option value="Weighted Bodyweight">Weighted Bodyweight</option>
-                <option value="Assisted Bodyweight">Assisted Bodyweight</option>
-                <option value="Duration">Duration</option>
-              </select>
-              <AddContainer>
-                <Add onClick={handleClick}>Add</Add>
-            </AddContainer>
+              <NewFormTitleContainer>
+                <h1>Add a new exercise</h1>
+              </NewFormTitleContainer>
+              <BigContainer>
+                <SectionContainer>
+                  <SectionName>Exercise Name</SectionName>
+                  <NewInput onChange={(e) => {setName(e.target.value)}}></NewInput>
+                </SectionContainer><br></br>
+                <SectionContainer>
+                  <SectionName>Body Part</SectionName>
+                  <NewSelect id="BodyPart" onChange={(e) => {setBodyPart(e.target.value)}}>
+                    <option value="Core">Core</option>
+                    <option value="Arms">Arms</option>
+                    <option value="Back">Back</option>
+                    <option value="Chest">Chest</option>
+                    <option value="Legs">Legs</option>
+                    <option value="Shoulders">Shoulders</option>
+                    <option value="Full Body">Full Body</option>
+                    <option value="Cardio">Cardio</option>
+                  </NewSelect>
+                </SectionContainer><br></br>
+                <SectionContainer>
+                  <SectionName>Category</SectionName>
+                  <NewSelect id="Category" onChange={(e) => {setCategory(e.target.value)}}>
+                    <option value="Barbell">Barbell</option>
+                    <option value="Dumbell">Dumbell</option>
+                    <option value="Machine">Machine</option>
+                    <option value="Weighted Bodyweight">Weighted Bodyweight</option>
+                    <option value="Assisted Bodyweight">Assisted Bodyweight</option>
+                    <option value="Duration">Duration</option>
+                  </NewSelect>
+                </SectionContainer><br></br>
+                <AddContainer>
+                  <Add onClick={handleClick}>Add</Add>
+              </AddContainer>
+            </BigContainer>
             </NewForm>
       </AddModalContainer>
     </AddModalBackground>
@@ -110,32 +121,45 @@ const AddModalContainer = styled.div`
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 2;
-  background-color: #ecd49c;
+  background-color: #d2c8b7;
   text-align: center;
   width: 60%;
   height: 60%;
 `;
 
-const Exit = styled.button`
+const Exit = styled.div`
   position: fixed;
   top: 0;
   right 0;
   margin: 5px;
   z-index: 1;
+  border: solid black;
+  border-radius: 5px;
+  background-color: white;
+  :hover {
+    background-color: #d2bab7;
+    cursor: pointer;
+  };
+  justify-content: center;
 `;
 
 const AddContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  width: 70%;
+  position: fixed;
+  bottom: 10%;
+  right: -50%;
+  width: 100%;
 `;
 
 const Add = styled.div`
-  width: 70%;
-  position: fixed;
-  bottom: 0;
-  right: 0;
   background-color: white;
+  border: solid black;
+  text-align: center;
+  border-radius: 5px;
+  width: 30%;
+  :hover {
+    background-color: #B7C5D2;
+    mouse: pointer;
+  }
 `;
 
 const NewForm = styled.section`
@@ -143,6 +167,7 @@ const NewForm = styled.section`
   position: fixed;
   top: 0;
   right: 0;
+  height: 100%;
 `;
 
 const PreviousExercises = styled.div`
@@ -163,9 +188,6 @@ const PreviousTitleContainer = styled.div`
   border-radius: 5px;
 `;
 
-const PreviousTitle = styled.h3`
-
-`;
 
 const PrevExerciseNameContainer = styled.div`
   display: flex;
@@ -174,7 +196,7 @@ const PrevExerciseNameContainer = styled.div`
   background-color: white;
   justify-content: center;
   :hover {
-    background-color: #ecd49c;
+    background-color: #d2bab7;
     cursor: pointer;
   }
   border-radius: 5px;
@@ -182,8 +204,46 @@ const PrevExerciseNameContainer = styled.div`
 `;
 
 const BiggerContainer = styled.div`
-display: flex;
-align-content: center;
-flex-direction: column;
-justify-content: center;
+  display: flex;
+  align-content: center;
+  flex-direction: column;
+  justify-content: center;
+`;
+
+const NewFormTitleContainer = styled.div`
+  margin: 5px;
+`;
+
+const SectionName = styled.h2`
+  display: inline-flex;
+  margin: 5px;
+  align-self: flex-start;
+`;
+
+const NewInput = styled.input`
+  position: fixed;
+  right: 0;
+  width: 30%;
+  margin: 5px;
+  height: auto;
+`;
+
+const NewSelect = styled.select`
+  position: fixed;
+  right: 0;
+  width: 30%;
+  margin: 5px;
+  height: auto;
+`;
+
+const SectionContainer = styled.div`
+  display: flex;
+  justify-content: flex-start;
+`;
+
+const BigContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  height: auto;
 `;
