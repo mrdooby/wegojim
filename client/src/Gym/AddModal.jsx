@@ -3,6 +3,7 @@ import axios from 'axios';
 import styled from 'styled-components';
 import img from '../HomePage/ImageURLs.js';
 import Select from 'react-select';
+import CreatableSelect from 'react-select/creatable';
 
 const AddModal = (props) => {
   const [name, setName] = useState('');
@@ -40,7 +41,7 @@ const AddModal = (props) => {
 
   const handleClick = (e) => {
     e.preventDefault();
-    props.setExercise([...props.exercise, {name: name, category: category.value, bodyPart: bodyPart.value, date: props.date}]);
+    props.setExercise([...props.exercise, {name: name.value, category: category.value, bodyPart: bodyPart.value, date: props.date}]);
     props.setToggleModal(false);
   };
 
@@ -62,8 +63,7 @@ const AddModal = (props) => {
       <AddModalContainer>
           <Exit onClick={handleReset}> X </Exit>
             <PreviousExercises>
-              {console.log('cat', category)}
-              {console.log('body', bodyPart)}
+              {console.log('name', name)}
               <PreviousTitleContainer>
                 <h1>Previous Exercises</h1>
               </PreviousTitleContainer>
@@ -83,7 +83,11 @@ const AddModal = (props) => {
               <BigContainer>
                 <SectionContainer>
                   <SectionName>Exercise Name</SectionName>
-                  <NewInput onChange={(e) => {setName(e.target.value)}}></NewInput>
+                  {/* <NewInput onChange={(e) => {setName(e.target.value)}}></NewInput> */}
+                  <CreatableSelect
+                    isClearable
+                    onChange={setName}
+                  />
                 </SectionContainer><br></br>
                 <SectionContainer>
                   <SectionName>Body Part</SectionName>
